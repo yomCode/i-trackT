@@ -4,7 +4,8 @@
   height: 80px;
   display: flex;
   background-color: #ffffff;
-  border: 1px solid #303030;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   border-radius: 5px;
   margin: 10rem auto 0 auto;
   padding: 0 20px;
@@ -13,10 +14,10 @@
 form {
   width: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
   margin: auto 0;
   background-color: #ffffff;
+  gap: 10px;
 }
 
 input {
@@ -24,8 +25,5 @@ input {
   margin-right: 10px;
   font-size: 20px;
   color: #303030;
-}
-
-button {
-  width: 20%;
+  margin-right: 10px;
 }

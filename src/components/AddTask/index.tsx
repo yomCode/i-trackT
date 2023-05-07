@@ -1,4 +1,6 @@
 import React from "react";
+
+import Button from "../utils/Button";
 import Styles from "./Styles.module.css";
 
 interface FormElements extends HTMLFormControlsCollection {
@@ -20,9 +22,7 @@ const AddTask = () => {
     <div className={Styles.container}>
       <form className={Styles.add_task} onSubmit={handleAddTask}>
         <input type="text" name="task" placeholder="add task" />
-        <button className="btn-success" type="submit">
-          Add
-        </button>
+        <Button backgroundColor="#03b056"> Add </Button>
       </form>
     </div>
   );
