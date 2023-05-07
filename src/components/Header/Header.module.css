@@ -1,0 +1,18 @@
+.nav {
+  width: 100vw;
+  height: 80px;
+  max-width: 900px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  margin: 0 auto;
+  box-shadow: 3px 2px 0px 0px rgba(173, 163, 163, 0.54);
+  -webkit-box-shadow: 3px 2px 0px 0px rgba(173, 163, 163, 0.54);
+  -moz-box-shadow: 3px 2px 0px 0px rgba(173, 163, 163, 0.54);
+}
+
+.logo {
+  width: 150px;
+  height: 50px;
+}

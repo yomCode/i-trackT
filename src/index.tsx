@@ -1,10 +1,10 @@
 import React from "react";
-import ReactDoM from "react-dom/client";
-import ITrack from "./ITrack";
+import ReactDOM from "react-dom/client";
 
+import ITrack from "./ITrack";
 import "./index.css";
 
-const root = ReactDoM.createRoot(
+const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 

@@ -1,7 +1,14 @@
 import React from "react";
+import Header from "./components/Header";
+import AddTask from "./components/AddTask";
 
 const ITrack = () => {
-  return <h1>Hello World</h1>;
+  return (
+    <>
+      <Header />
+      <AddTask />
+    </>
+  );
 };
 
 export default ITrack;

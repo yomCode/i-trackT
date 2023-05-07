@@ -1,0 +1,31 @@
+.container {
+  width: 100%;
+  max-width: 600px;
+  height: 80px;
+  display: flex;
+  background-color: #ffffff;
+  border: 1px solid #303030;
+  border-radius: 5px;
+  margin: 10rem auto 0 auto;
+  padding: 0 20px;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto 0;
+  background-color: #ffffff;
+}
+
+input {
+  width: 70%;
+  margin-right: 10px;
+  font-size: 20px;
+  color: #303030;
+}
+
+button {
+  width: 20%;
+}
