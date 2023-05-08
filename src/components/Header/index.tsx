@@ -8,7 +8,7 @@ const Index = () => {
 
   return (
     <nav className={Styles.nav}>
-      <img className={Styles.logo} src={Logo} alt="i-trackT" />
+      <img className={Styles.logo} src={Logo} alt="i-trackT" loading="lazy" />
       <div className={Styles.themes_selector}>
         <span
           onClick={() => setActiveTheme("light")}
