@@ -1,0 +1,49 @@
+.container {
+  /* display: flex; */
+  border: 2px solid black;
+  border-radius: 10px;
+  border-left: 5px solid #f5ba13;
+  padding: 10px 20px;
+
+  & :pending {
+    border-left: 5px solid #f5ba13;
+  }
+
+  & :completed {
+    border-left: 5px solid #00b300;
+  }
+
+  & :in_progress {
+    border-left: 5px solid #1100ff;
+  }
+}
+
+.details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.task {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.delete {
+  color: red;
+}
+
+.edit {
+  color: rgb(65, 65, 173);
+}

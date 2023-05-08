@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
+
+import TaskCard from "../TaskCard.tsx";
 import Button from "../utils/Button";
 import Styles from "./Styles.module.css";
-
-type Task = "todo" | "in_progress" | "done";
 
 interface TaskProps {
   id: string;
   task: string;
-  status: Task;
-  date: Date;
+  status: "completed" | "pending" | "in-progress";
+  time: string;
 }
 
-const Todo = () => {
-  const tasks = [{}];
+interface TaskListProps {
+  taskList: TaskProps[];
+}
+
+const Todo = ({ taskList }: TaskListProps) => {
   const count = 10;
   return (
     <div className={Styles.container}>
@@ -26,22 +29,19 @@ const Todo = () => {
               borderRadius: "50%",
               marginLeft: "1rem",
               backgroundColor: "#dfdfdf",
+              color: "#4e4f4f",
             }}
           >
             {" "}
-            {count}{" "}
+            {taskList?.length}{" "}
           </span>
         </h3>
         <Button backgroundColor="#0f6af3">Clear all</Button>
       </div>
       <hr />
-      <div>
-        {tasks?.map((task) => {
-          return (
-            <div className={Styles.container_secondary}>
-              <p>{}</p>
-            </div>
-          );
+      <div className={Styles.container_secondary}>
+        {taskList?.map((task) => {
+          return <TaskCard />;
         })}
       </div>
     </div>
