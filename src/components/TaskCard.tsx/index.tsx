@@ -30,6 +30,8 @@ const TaskCard = ({
   status,
   taskList,
   setTaskList,
+  task,
+  setTask,
 }: TaskCardProps) => {
   //   const [status, setStatus] = React.useState<
   //     "completed" | "pending" | "in progress"
@@ -40,14 +42,20 @@ const TaskCard = ({
   const handleDeleteTask = () => {
     const newTaskList = taskList.filter((task) => task?.id !== id);
     setTaskList(newTaskList);
-    deleteModal?.close();
   };
 
-  const handleUpdateTask = () => {
+  const handleUpdateTaskStatus = () => {
     const foundTask = taskList.find((task) => task?.id === id);
     if (foundTask) {
       foundTask.status = "pending";
       setTaskList([...taskList]);
+    }
+  };
+
+  const handleUpdateTaskDescription = () => {
+    const task = taskList.find((task) => task?.id === id);
+    if (task) {
+      setTask(task?.description);
     }
   };
 
@@ -86,9 +94,12 @@ const TaskCard = ({
             </div>
           </dialog>
 
-          <AiFillEdit className={[Styles.icon, Styles.edit].join(" ")} />
+          <AiFillEdit
+            onClick={handleUpdateTaskDescription}
+            className={[Styles.icon, Styles.edit].join(" ")}
+          />
           <MdPendingActions
-            onClick={handleUpdateTask}
+            onClick={handleUpdateTaskStatus}
             className={[Styles.icon, Styles.update].join(" ")}
           />
         </div>

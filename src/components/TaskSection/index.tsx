@@ -18,9 +18,17 @@ interface TaskListProps {
 
 interface TaskSectionProps extends TaskListProps {
   sectionName: string;
+  task: string;
+  setTask: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Todo = ({ taskList, setTaskList, sectionName }: TaskSectionProps) => {
+const Todo = ({
+  taskList,
+  setTaskList,
+  task,
+  setTask,
+  sectionName,
+}: TaskSectionProps) => {
   return (
     <div className={Styles.container}>
       <div className={Styles.container_primary}>
@@ -47,17 +55,19 @@ const Todo = ({ taskList, setTaskList, sectionName }: TaskSectionProps) => {
       <hr />
       <div className={Styles.container_secondary}>
         {taskList
-          ?.filter((task) => task?.status === sectionName)
-          .map((task) => {
+          ?.filter((todo) => todo?.status === sectionName)
+          .map((todo) => {
             return (
               <TaskCard
-                key={task?.id}
-                description={task?.description}
-                time={task?.time}
-                id={task?.id}
-                status={task?.status}
+                key={todo?.id}
+                description={todo?.description}
+                time={todo?.time}
+                id={todo?.id}
+                status={todo?.status}
                 taskList={taskList}
                 setTaskList={setTaskList}
+                task={task}
+                setTask={setTask}
               />
             );
           })}
