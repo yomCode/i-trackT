@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import Button from "../utils/Button";
 import Styles from "./Styles.module.css";
@@ -26,19 +26,39 @@ export interface TaskListProps {
 }
 
 const AddTask = ({ taskList, setTaskList, task, setTask }: TaskListProps) => {
+  // const [value, setValue] = React.useState<string>( task?.description ||"");
+
   const handleAddTask = (e: React.FormEvent<SubmitTaskFormElement>) => {
     e.preventDefault();
-    const date = new Date();
-    const id: string = date.getTime().toString();
-    const description: string = e.currentTarget.elements.task.value;
-    const status: "completed" | "pending" | "in progress" = "pending";
-    const time: string = `${date.toLocaleTimeString()} ${date.toLocaleDateString()}`;
-    const newTask: TaskProps = { id, description, status, time };
-    console.log({ newTask });
+    e.currentTarget.focus();
 
-    setTaskList([...taskList, newTask]);
-    e.currentTarget.reset();
+    if (task?.id) {
+      const updatedList: any = taskList.map((taskItem) =>
+        task?.id === taskItem?.id
+          ? {
+              id: taskItem?.id,
+              description: e.currentTarget.elements.task.value,
+              status: taskItem?.status,
+              time: taskItem?.time,
+            }
+          : taskItem
+      );
+      setTaskList(updatedList);
+      setTask({ id: "", description: "", status: "pending", time: "" });
+    } else {
+      const date = new Date();
+      const id: string = date.getTime().toString();
+      const description: string = e.currentTarget.elements.task.value;
+      const status: "completed" | "pending" | "in progress" = "pending";
+      const time: string = `${date.toLocaleTimeString()} ${date.toLocaleDateString()}`;
+      const newTask: TaskProps = { id, description, status, time };
+
+      setTaskList([...taskList, newTask]);
+      setTask({ id: "", description: "", status: "pending", time: "" });
+    }
   };
+
+  console.log({ test: task });
 
   return (
     <div className={Styles.container}>
@@ -48,10 +68,13 @@ const AddTask = ({ taskList, setTaskList, task, setTask }: TaskListProps) => {
           name="task"
           placeholder="add task"
           autoComplete="off"
-          // value={task?.description}
-          // onChange={(e) => setTask( e.target.value)}
+          value={task && task?.description}
+          onChange={(e) => setTask({ ...task, description: e.target.value })}
         />
-        <Button backgroundColor="#03b056"> Add </Button>
+        <Button backgroundColor="#03b056">
+          {" "}
+          {task?.id ? "Update" : "Add"}{" "}
+        </Button>
       </form>
     </div>
   );

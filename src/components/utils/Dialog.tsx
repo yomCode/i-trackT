@@ -57,19 +57,25 @@ export const ChangeTaskStatusDialog = ({
   const handleChangeTaskStatus = (
     status: "pending" | "in progress" | "completed"
   ) => {
-    const task = taskList?.find((task) => task?.id === id);
-    if (task && setTask) {
-      task.status = status;
-      setTask({ ...task });
-    }
-
-    if (taskList && setTaskList) {
-      setTaskList([...taskList]);
-    }
+    // const task = taskList?.find((task) => task?.id === id);
+    const updatedTaskList: any = taskList?.map((taskItem) =>
+      taskItem?.id === id
+        ? setTask &&
+          setTask({
+            id: taskItem?.id,
+            description: taskItem?.description,
+            status: status,
+            time: taskItem?.time,
+          })
+        : taskItem
+    );
+    setTaskList && setTaskList(updatedTaskList);
 
     console.log({ taskList, id });
     modal("changeStatus").close();
   };
+
+  console.log({ newTest: task });
 
   return (
     <dialog id="changeStatus">

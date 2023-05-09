@@ -23,7 +23,7 @@ const Button = ({
         padding: "10px 20px",
         border: "none",
         borderRadius: "5px",
-        fontSize: "1.8rem",
+        fontSize: "13px",
       }}
       className={!disabled ? "btn" : "btn-disabled"}
       disabled={disabled}

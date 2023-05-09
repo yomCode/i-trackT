@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { TaskListProps } from "../AddTask";
 import { AiFillEdit } from "react-icons/ai";
 import { MdPendingActions } from "react-icons/md";
@@ -24,22 +24,14 @@ const TaskCard = ({
   task,
   setTask,
 }: TaskCardProps) => {
-  // const handleUpdateTaskStatus = () => {
-  //   const foundTask = taskList.find((task) => task?.id === id);
-  //   if (foundTask) {
-  //     foundTask.status = "completed";
-  //     setTaskList([...taskList]);
-  //   }
-  // };
-
   const modal = (dialogId: string) => {
     return document.getElementById(dialogId) as HTMLDialogElement;
   };
 
   const handleUpdateTaskDescription = () => {
-    const task = taskList.find((task) => task?.id === id);
-    if (task) {
-      // setTask(task?.description);
+    const foundTask = taskList.find((task) => task?.id === id);
+    if (foundTask) {
+      setTask(foundTask);
     }
   };
 
