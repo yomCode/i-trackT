@@ -4,7 +4,7 @@ import TaskCard from "../TaskCard.tsx";
 import Button from "../utils/Button";
 import Styles from "./Styles.module.css";
 
-interface TaskProps {
+export interface TaskProps {
   id: string;
   description: string;
   status: "completed" | "pending" | "in progress";

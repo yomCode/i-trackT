@@ -3,20 +3,11 @@ import { TaskListProps } from "../AddTask";
 import { AiFillEdit } from "react-icons/ai";
 import { MdPendingActions } from "react-icons/md";
 import { RiDeleteBin3Line } from "react-icons/ri";
-
+import { DeleteDialog } from "../utils/Dialog";
 import Styles from "./TaskCard.module.css";
 import Button from "../utils/Button";
 
-// interface ModalProps {
-//   children?: ReactNode;
-//   open: boolean;
-// }
-
-// export const Modal = ({ children }: ModalProps) => {
-//   return <dialog>{children}</dialog>;
-// };
-
-interface TaskCardProps extends TaskListProps {
+export interface TaskCardProps extends TaskListProps {
   children?: ReactNode;
   id: string;
   time: string;
@@ -35,11 +26,6 @@ const TaskCard = ({
   setTask,
 }: TaskCardProps) => {
   const [dialogId, setDialogId] = React.useState<string>("");
-
-  const handleDeleteTask = () => {
-    const newTaskList = taskList.filter((task) => task?.id !== id);
-    setTaskList(newTaskList);
-  };
 
   const handleUpdateTaskStatus = () => {
     const foundTask = taskList.find((task) => task?.id === id);
@@ -86,21 +72,12 @@ const TaskCard = ({
             onClick={() => modal("delete").showModal()}
             className={[Styles.icon, Styles.delete].join(" ")}
           />
-
-          <dialog id="delete">
-            <p>Are you sure you want to delete this task?</p>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                gap: "1rem",
-              }}
-            >
-              <Button onClick={handleDeleteTask}>Yes</Button>
-              <Button onClick={() => modal("delete").close()}>No</Button>
-            </div>
-          </dialog>
-
+          <DeleteDialog
+            id={id}
+            taskList={taskList}
+            setTaskList={setTaskList}
+            dialogId="delete"
+          />
           <AiFillEdit
             onClick={handleUpdateTaskDescription}
             className={[Styles.icon, Styles.edit].join(" ")}
