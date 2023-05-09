@@ -5,9 +5,15 @@ interface ButtonProps {
   backgroundColor?: string;
   onClick?: () => void;
   style?: React.CSSProperties;
+  disabled?: boolean;
 }
 
-const Button = ({ children, backgroundColor, onClick }: ButtonProps) => {
+const Button = ({
+  children,
+  backgroundColor,
+  onClick,
+  disabled,
+}: ButtonProps) => {
   return (
     <button
       onClick={() => onClick && onClick()}
@@ -17,10 +23,10 @@ const Button = ({ children, backgroundColor, onClick }: ButtonProps) => {
         padding: "10px 20px",
         border: "none",
         borderRadius: "5px",
-        cursor: "pointer",
         fontSize: "1.8rem",
       }}
-      className="btn"
+      className={!disabled ? "btn" : "btn-disabled"}
+      disabled={disabled}
     >
       {children}
     </button>

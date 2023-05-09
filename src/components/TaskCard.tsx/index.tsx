@@ -3,7 +3,7 @@ import { TaskListProps } from "../AddTask";
 import { AiFillEdit } from "react-icons/ai";
 import { MdPendingActions } from "react-icons/md";
 import { RiDeleteBin3Line } from "react-icons/ri";
-import { DeleteDialog } from "../utils/Dialog";
+import { DeleteDialog, ChangeTaskStatusDialog } from "../utils/Dialog";
 import Styles from "./TaskCard.module.css";
 import Button from "../utils/Button";
 
@@ -25,8 +25,6 @@ const TaskCard = ({
   task,
   setTask,
 }: TaskCardProps) => {
-  const [dialogId, setDialogId] = React.useState<string>("");
-
   const handleUpdateTaskStatus = () => {
     const foundTask = taskList.find((task) => task?.id === id);
     if (foundTask) {
@@ -42,7 +40,7 @@ const TaskCard = ({
   const handleUpdateTaskDescription = () => {
     const task = taskList.find((task) => task?.id === id);
     if (task) {
-      setTask(task?.description);
+      // setTask(task?.description);
     }
   };
 
@@ -83,8 +81,16 @@ const TaskCard = ({
             className={[Styles.icon, Styles.edit].join(" ")}
           />
           <MdPendingActions
-            onClick={handleUpdateTaskStatus}
+            onClick={() => modal("changeStatus").showModal()}
             className={[Styles.icon, Styles.update].join(" ")}
+          />
+          <ChangeTaskStatusDialog
+            task={task}
+            setTask={setTask}
+            id={id}
+            dialogId="edit"
+            taskList={taskList}
+            setTaskList={setTaskList}
           />
         </div>
       </div>

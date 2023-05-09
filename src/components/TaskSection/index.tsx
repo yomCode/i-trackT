@@ -18,8 +18,8 @@ interface TaskListProps {
 
 interface TaskSectionProps extends TaskListProps {
   sectionName: string;
-  task: string;
-  setTask: React.Dispatch<React.SetStateAction<string>>;
+  task: TaskProps;
+  setTask: React.Dispatch<React.SetStateAction<TaskProps>>;
 }
 
 const Todo = ({

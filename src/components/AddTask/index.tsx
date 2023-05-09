@@ -21,8 +21,8 @@ interface TaskProps {
 export interface TaskListProps {
   taskList: TaskProps[];
   setTaskList: React.Dispatch<React.SetStateAction<TaskProps[]>>;
-  task: string;
-  setTask: React.Dispatch<React.SetStateAction<string>>;
+  task: TaskProps;
+  setTask: React.Dispatch<React.SetStateAction<TaskProps>>;
 }
 
 const AddTask = ({ taskList, setTaskList, task, setTask }: TaskListProps) => {
@@ -48,8 +48,8 @@ const AddTask = ({ taskList, setTaskList, task, setTask }: TaskListProps) => {
           name="task"
           placeholder="add task"
           autoComplete="off"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
+          // value={task?.description}
+          // onChange={(e) => setTask( e.target.value)}
         />
         <Button backgroundColor="#03b056"> Add </Button>
       </form>
