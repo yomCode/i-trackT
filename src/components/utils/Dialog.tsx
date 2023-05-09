@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "./Button";
 import { TaskProps } from "../TaskSection/index";
 
@@ -73,6 +73,19 @@ export const ChangeTaskStatusDialog = ({
 
   return (
     <dialog id="changeStatus">
+      <p
+        style={{
+          textAlign: "right",
+          fontSize: "4rem",
+          margin: "0",
+          fontFamily: "sans-serif",
+          cursor: "pointer",
+          padding: "0",
+        }}
+        onClick={() => modal("changeStatus").close()}
+      >
+        X
+      </p>
       <div
         style={{
           display: "flex",

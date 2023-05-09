@@ -5,7 +5,6 @@ import { MdPendingActions } from "react-icons/md";
 import { RiDeleteBin3Line } from "react-icons/ri";
 import { DeleteDialog, ChangeTaskStatusDialog } from "../utils/Dialog";
 import Styles from "./TaskCard.module.css";
-import Button from "../utils/Button";
 
 export interface TaskCardProps extends TaskListProps {
   children?: ReactNode;
@@ -25,13 +24,13 @@ const TaskCard = ({
   task,
   setTask,
 }: TaskCardProps) => {
-  const handleUpdateTaskStatus = () => {
-    const foundTask = taskList.find((task) => task?.id === id);
-    if (foundTask) {
-      foundTask.status = "completed";
-      setTaskList([...taskList]);
-    }
-  };
+  // const handleUpdateTaskStatus = () => {
+  //   const foundTask = taskList.find((task) => task?.id === id);
+  //   if (foundTask) {
+  //     foundTask.status = "completed";
+  //     setTaskList([...taskList]);
+  //   }
+  // };
 
   const modal = (dialogId: string) => {
     return document.getElementById(dialogId) as HTMLDialogElement;
@@ -94,8 +93,17 @@ const TaskCard = ({
           />
         </div>
       </div>
-      <hr />
-      <div>
+      <hr
+        style={{
+          margin: "0",
+          padding: "0",
+        }}
+      />
+      <div
+        style={{
+          height: "25px",
+        }}
+      >
         <p>{time}</p>
       </div>
     </div>

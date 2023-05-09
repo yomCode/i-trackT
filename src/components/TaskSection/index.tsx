@@ -50,7 +50,17 @@ const Todo = ({
             }{" "}
           </span>
         </h3>
-        <Button backgroundColor="#0f6af3">Clear all</Button>
+        <Button
+          backgroundColor={
+            sectionName === "pending"
+              ? "#f3b30f"
+              : sectionName === "in progress"
+              ? "#0f6af3"
+              : "#00b300"
+          }
+        >
+          Clear all
+        </Button>
       </div>
       <hr />
       <div className={Styles.container_secondary}>

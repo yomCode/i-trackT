@@ -3,54 +3,46 @@ import Logo from "../../assests/images/i-trackTlogo.png";
 
 import Styles from "./Header.module.css";
 
-const Index = () => {
-  const [activeTheme, setActiveTheme] = React.useState("medium");
+interface ThemesProps {
+  theme: string;
+  setTheme: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const Index = ({ theme, setTheme }: ThemesProps) => {
+  const [activeTheme, setActiveTheme] = React.useState("light");
+
+  const handleChangeActiveTheme = (theme: string) => {
+    setActiveTheme(theme);
+    setTheme(theme);
+  };
 
   return (
     <nav className={Styles.nav}>
       <img className={Styles.logo} src={Logo} alt="i-trackT" loading="lazy" />
-      <div className={Styles.themes_selector}>
+      <div className="themes_selector">
         <span
-          onClick={() => setActiveTheme("light")}
-          className={[
-            Styles.light,
-            activeTheme === "light" ? Styles.active : "",
-          ].join(" ")}
+          onClick={() => handleChangeActiveTheme("light")}
+          className={`${"light"} ${activeTheme === "light" ? "active" : ""}`}
         ></span>
         <span
-          onClick={() => setActiveTheme("medium")}
-          className={[
-            Styles.medium,
-            activeTheme === "medium" ? Styles.active : "",
-          ].join(" ")}
+          onClick={() => handleChangeActiveTheme("medium")}
+          className={`${"medium"} ${activeTheme === "medium" ? "active" : ""}`}
         ></span>
         <span
-          onClick={() => setActiveTheme("dark")}
-          className={[
-            Styles.dark,
-            activeTheme === "dark" ? Styles.active : "",
-          ].join(" ")}
+          onClick={() => handleChangeActiveTheme("dark")}
+          className={`${"dark"} ${activeTheme === "dark" ? "active" : ""}`}
         ></span>
         <span
-          onClick={() => setActiveTheme("gOne")}
-          className={[
-            Styles.gOne,
-            activeTheme === "gOne" ? Styles.active : "",
-          ].join(" ")}
+          onClick={() => handleChangeActiveTheme("gOne")}
+          className={`${"gOne"} ${activeTheme === "gOne" ? "active" : ""}`}
         ></span>
         <span
-          onClick={() => setActiveTheme("gTwo")}
-          className={[
-            Styles.gTwo,
-            activeTheme === "gTwo" ? Styles.active : "",
-          ].join(" ")}
+          onClick={() => handleChangeActiveTheme("gTwo")}
+          className={`${"gTwo"} ${activeTheme === "gTwo" ? "active" : ""}`}
         ></span>
         <span
-          onClick={() => setActiveTheme("gThree")}
-          className={[
-            Styles.gThree,
-            activeTheme === "gThree" ? Styles.active : "",
-          ].join(" ")}
+          onClick={() => handleChangeActiveTheme("gThree")}
+          className={`${"gThree"} ${activeTheme === "gThree" ? "active" : ""}`}
         ></span>
       </div>
     </nav>
