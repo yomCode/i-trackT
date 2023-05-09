@@ -5,6 +5,7 @@ import { MdPendingActions } from "react-icons/md";
 import { RiDeleteBin3Line } from "react-icons/ri";
 
 import Styles from "./TaskCard.module.css";
+import Button from "../utils/Button";
 
 // interface ModalProps {
 //   children?: ReactNode;
@@ -33,11 +34,7 @@ const TaskCard = ({
   task,
   setTask,
 }: TaskCardProps) => {
-  //   const [status, setStatus] = React.useState<
-  //     "completed" | "pending" | "in progress"
-  //   >("pending");
-
-  const deleteModal = document.querySelector("dialog");
+  const [dialogId, setDialogId] = React.useState<string>("");
 
   const handleDeleteTask = () => {
     const newTaskList = taskList.filter((task) => task?.id !== id);
@@ -47,9 +44,13 @@ const TaskCard = ({
   const handleUpdateTaskStatus = () => {
     const foundTask = taskList.find((task) => task?.id === id);
     if (foundTask) {
-      foundTask.status = "pending";
+      foundTask.status = "completed";
       setTaskList([...taskList]);
     }
+  };
+
+  const modal = (dialogId: string) => {
+    return document.getElementById(dialogId) as HTMLDialogElement;
   };
 
   const handleUpdateTaskDescription = () => {
@@ -82,15 +83,21 @@ const TaskCard = ({
         <hr className={Styles.hr} />
         <div className={Styles.cta}>
           <RiDeleteBin3Line
-            onClick={() => deleteModal?.showModal()}
+            onClick={() => modal("delete").showModal()}
             className={[Styles.icon, Styles.delete].join(" ")}
           />
 
-          <dialog>
+          <dialog id="delete">
             <p>Are you sure you want to delete this task?</p>
-            <div>
-              <button onClick={handleDeleteTask}>Yes</button>
-              <button onClick={() => deleteModal?.close()}>No</button>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: "1rem",
+              }}
+            >
+              <Button onClick={handleDeleteTask}>Yes</Button>
+              <Button onClick={() => modal("delete").close()}>No</Button>
             </div>
           </dialog>
 

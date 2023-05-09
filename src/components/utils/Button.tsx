@@ -4,6 +4,7 @@ interface ButtonProps {
   children: React.ReactNode;
   backgroundColor?: string;
   onClick?: () => void;
+  style?: React.CSSProperties;
 }
 
 const Button = ({ children, backgroundColor, onClick }: ButtonProps) => {
