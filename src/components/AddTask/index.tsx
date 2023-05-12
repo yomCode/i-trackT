@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Button from "../utils/Button";
 import Styles from "./Styles.module.css";
@@ -14,7 +14,7 @@ interface SubmitTaskFormElement extends HTMLFormElement {
 interface TaskProps {
   id: string;
   description: string;
-  status: "completed" | "pending" | "in progress";
+  status: string;
   time: string;
 }
 
@@ -26,39 +26,39 @@ export interface TaskListProps {
 }
 
 const AddTask = ({ taskList, setTaskList, task, setTask }: TaskListProps) => {
-  // const [value, setValue] = React.useState<string>( task?.description ||"");
-
   const handleAddTask = (e: React.FormEvent<SubmitTaskFormElement>) => {
     e.preventDefault();
     e.currentTarget.focus();
 
     if (task?.id) {
-      const updatedList: any = taskList.map((taskItem) =>
-        task?.id === taskItem?.id
-          ? {
-              id: taskItem?.id,
-              description: e.currentTarget.elements.task.value,
-              status: taskItem?.status,
-              time: taskItem?.time,
-            }
-          : taskItem
-      );
-      setTaskList(updatedList);
-      setTask({ id: "", description: "", status: "pending", time: "" });
+      if (task?.description) {
+        const updatedList: any = taskList.map((taskItem) =>
+          task?.id === taskItem?.id
+            ? {
+                id: taskItem?.id,
+                description: e.currentTarget.elements.task.value,
+                status: taskItem?.status,
+                time: taskItem?.time,
+              }
+            : taskItem
+        );
+        setTaskList(updatedList);
+        setTask({ id: "", description: "", status: "", time: "" });
+      }
     } else {
-      const date = new Date();
-      const id: string = date.getTime().toString();
-      const description: string = e.currentTarget.elements.task.value;
-      const status: "completed" | "pending" | "in progress" = "pending";
-      const time: string = `${date.toLocaleTimeString()} ${date.toLocaleDateString()}`;
-      const newTask: TaskProps = { id, description, status, time };
+      if (task?.description) {
+        const date = new Date();
+        const id: string = date.getTime().toString();
+        const description: string = e.currentTarget.elements.task.value;
+        const status: string = "pending";
+        const time: string = `${date.toLocaleTimeString()} ${date.toLocaleDateString()}`;
+        const newTask: TaskProps = { id, description, status, time };
 
-      setTaskList([...taskList, newTask]);
-      setTask({ id: "", description: "", status: "pending", time: "" });
+        setTaskList([...taskList, newTask]);
+        setTask({ id: "", description: "", status: "pending", time: "" });
+      }
     }
   };
-
-  console.log({ test: task });
 
   return (
     <div className={Styles.container}>

@@ -11,6 +11,7 @@
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   background-color: white;
   z-index: 100;
+  margin-top: 2rem;
   /* position: fixed; */
   /* top: 0; */
 }

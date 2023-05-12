@@ -3,18 +3,21 @@ import Logo from "../../assests/images/i-trackTlogo.png";
 
 import Styles from "./Header.module.css";
 
-interface ThemesProps {
+export interface ThemesProps {
   theme: string;
   setTheme: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Index = ({ theme, setTheme }: ThemesProps) => {
+const Index = () => {
   const [activeTheme, setActiveTheme] = React.useState("light");
 
   const handleChangeActiveTheme = (theme: string) => {
     setActiveTheme(theme);
-    setTheme(theme);
   };
+
+  const theme = activeTheme;
+
+  document.documentElement.className = theme;
 
   return (
     <nav className={Styles.nav}>

@@ -9,24 +9,20 @@ interface ModalProps {
   setTaskList?: React.Dispatch<React.SetStateAction<TaskProps[]>>;
   task?: TaskProps;
   setTask?: React.Dispatch<React.SetStateAction<TaskProps>>;
+  deleteTask: () => void;
 }
 
 const modal = (dialogId: string) => {
   return document.getElementById(dialogId) as HTMLDialogElement;
 };
 
-export const DeleteDialog = ({
-  id,
-  dialogId,
-  taskList,
-  setTaskList,
-}: ModalProps) => {
-  const handleDeleteTask = () => {
-    const newTaskList = taskList?.filter((task) => task?.id !== id);
-    if (newTaskList && setTaskList) {
-      setTaskList(newTaskList);
-    }
-  };
+export const DeleteDialog = ({ dialogId, deleteTask }: ModalProps) => {
+  // const handleDeleteTask = () => {
+  //   const newTaskList = taskList?.filter((task) => task?.id !== id);
+  //   if (newTaskList && setTaskList) {
+  //     setTaskList(newTaskList);
+  //   }
+  // };
 
   return (
     <dialog id="delete">
@@ -38,7 +34,7 @@ export const DeleteDialog = ({
           gap: "1rem",
         }}
       >
-        <Button onClick={handleDeleteTask}>Yes, sure!</Button>
+        <Button onClick={deleteTask}>Yes, sure!</Button>
         <Button onClick={() => (dialogId ? modal(dialogId).close() : "")}>
           No
         </Button>
@@ -47,35 +43,16 @@ export const DeleteDialog = ({
   );
 };
 
-export const ChangeTaskStatusDialog = ({
-  task,
-  setTask,
-  taskList,
-  setTaskList,
-  id,
-}: ModalProps) => {
-  const handleChangeTaskStatus = (
-    status: "pending" | "in progress" | "completed"
-  ) => {
-    // const task = taskList?.find((task) => task?.id === id);
-    const updatedTaskList: any = taskList?.map((taskItem) =>
-      taskItem?.id === id
-        ? setTask &&
-          setTask({
-            id: taskItem?.id,
-            description: taskItem?.description,
-            status: status,
-            time: taskItem?.time,
-          })
-        : taskItem
-    );
-    setTaskList && setTaskList(updatedTaskList);
+export const ChangeTaskStatusDialog = ({ task, setTask, id }: ModalProps) => {
+  const handleChangeTaskStatus = (newStatus: string, id: any) => {
+    const taskList = JSON.parse(localStorage.getItem("taskList") || "[]");
 
-    console.log({ taskList, id });
+    const foundTask = taskList?.find(
+      (foundTask: { id: any }) => foundTask?.id === id
+    );
+
     modal("changeStatus").close();
   };
-
-  console.log({ newTest: task });
 
   return (
     <dialog id="changeStatus">
@@ -110,19 +87,19 @@ export const ChangeTaskStatusDialog = ({
         </p>
         <Button
           disabled={task?.status === "pending"}
-          onClick={() => handleChangeTaskStatus("pending")}
+          onClick={() => handleChangeTaskStatus("pending", id)}
         >
           Pending
         </Button>
         <Button
           disabled={task?.status === "in progress"}
-          onClick={() => handleChangeTaskStatus("in progress")}
+          onClick={() => handleChangeTaskStatus("in progress", id)}
         >
           In progress
         </Button>
         <Button
           disabled={task?.status === "completed"}
-          onClick={() => handleChangeTaskStatus("completed")}
+          onClick={() => handleChangeTaskStatus("completed", id)}
         >
           Completed
         </Button>

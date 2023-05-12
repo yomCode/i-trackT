@@ -6,6 +6,7 @@ interface ButtonProps {
   onClick?: () => void;
   style?: React.CSSProperties;
   disabled?: boolean;
+  transform?: string;
 }
 
 const Button = ({
@@ -13,6 +14,7 @@ const Button = ({
   backgroundColor,
   onClick,
   disabled,
+  transform,
 }: ButtonProps) => {
   return (
     <button
@@ -24,6 +26,7 @@ const Button = ({
         border: "none",
         borderRadius: "5px",
         fontSize: "13px",
+        transform: transform,
       }}
       className={!disabled ? "btn" : "btn-disabled"}
       disabled={disabled}

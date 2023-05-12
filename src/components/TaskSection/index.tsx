@@ -7,7 +7,7 @@ import Styles from "./Styles.module.css";
 export interface TaskProps {
   id: string;
   description: string;
-  status: "completed" | "pending" | "in progress";
+  status: string;
   time: string;
 }
 
@@ -29,6 +29,12 @@ const Todo = ({
   setTask,
   sectionName,
 }: TaskSectionProps) => {
+  const handleClearAll = () => {
+    const updatedList: any = taskList.filter(
+      (taskItem) => taskItem?.status !== sectionName
+    );
+    setTaskList(updatedList);
+  };
   return (
     <div className={Styles.container}>
       <div className={Styles.container_primary}>
@@ -58,6 +64,8 @@ const Todo = ({
               ? "#0f6af3"
               : "#00b300"
           }
+          transform="rotate(45deg)"
+          onClick={handleClearAll}
         >
           Clear all
         </Button>
