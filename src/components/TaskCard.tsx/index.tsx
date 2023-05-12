@@ -1,9 +1,13 @@
-import React, { ReactNode } from "react";
+import React, {
+  ReactNode,
+  useEffect,
+  // useRef,
+  useState,
+} from "react";
 import { TaskListProps } from "../AddTask";
 import { AiFillEdit } from "react-icons/ai";
 import { MdPendingActions } from "react-icons/md";
 import { RiDeleteBin3Line } from "react-icons/ri";
-// import { DeleteDialog, ChangeTaskStatusDialog } from "../utils/Dialog";
 import Styles from "./TaskCard.module.css";
 import Button from "../utils/Button";
 import { TaskProps } from "../TaskSection";
@@ -26,12 +30,15 @@ const TaskCard = ({
   task,
   setTask,
 }: TaskCardProps) => {
-  const modal = (dialogId: string) => {
-    return document.getElementById(dialogId) as HTMLDialogElement;
-  };
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [statusDialogOpen, setStatusDialogOpen] = useState(false);
+
+  // const dialogRef = useRef();
+
+  useEffect(() => {}, []);
 
   const handleUpdateTaskDescription = () => {
-    const foundTask = taskList.find((task) => task?.id === id);
+    const foundTask = taskList?.find((task) => task?.id === id);
     if (foundTask) {
       setTask(foundTask);
     }
@@ -42,16 +49,17 @@ const TaskCard = ({
     if (newTaskList && setTaskList) {
       setTaskList(newTaskList);
     }
+    setDeleteDialogOpen(false);
   };
 
-  const handleChangeTaskStatus = () => {
+  const handleChangeTaskStatus = (status: string) => {
     const updatedTaskList = taskList?.map((task: TaskProps) => {
       if (task?.id === id) {
         return {
           id: task?.id,
           description: task?.description,
           time: task?.time,
-          status: "completed",
+          status: status,
         };
       } else {
         return task;
@@ -83,19 +91,11 @@ const TaskCard = ({
         <hr className={Styles.hr} />
         <div className={Styles.cta}>
           <RiDeleteBin3Line
-            // onClick={() => modal("delete").showModal()}
-            onClick={handleDeleteTask}
+            onClick={() => setDeleteDialogOpen(true)}
             className={[Styles.icon, Styles.delete].join(" ")}
           />
-          {/* <DeleteDialog
-            id={id}
-            taskList={taskList}
-            setTaskList={setTaskList}
-            dialogId="delete"
-            deleteTask={handleDeleteTask}
-          /> */}
-          <dialog id="delete">
-            <p>Are you sure you want to delete this task?</p>
+          <dialog open={deleteDialogOpen}>
+            <p>Are you sure you want to deleted this task?</p>
             <div
               style={{
                 display: "flex",
@@ -104,7 +104,7 @@ const TaskCard = ({
               }}
             >
               <Button onClick={handleDeleteTask}>Yes, sure!</Button>
-              <Button onClick={() => modal("delete").close()}>No</Button>
+              <Button onClick={() => setDeleteDialogOpen(false)}>No</Button>
             </div>
           </dialog>
           <AiFillEdit
@@ -112,19 +112,63 @@ const TaskCard = ({
             className={[Styles.icon, Styles.edit].join(" ")}
           />
           <MdPendingActions
-            // onClick={() => modal("changeStatus").showModal()}
-            onClick={handleChangeTaskStatus}
+            onClick={() => setStatusDialogOpen(true)}
             className={[Styles.icon, Styles.update].join(" ")}
           />
-          {/* <ChangeTaskStatusDialog
-            task={task}
-            setTask={setTask}
-            id={task?.id}
-            dialogId="edit"
-            taskList={taskList}
-            setTaskList={setTaskList}
 
-          /> */}
+          <dialog open={statusDialogOpen}>
+            <p
+              style={{
+                marginLeft: "75%",
+                fontSize: "1.5rem",
+                margin: "0",
+                fontFamily: "sans-serif",
+                cursor: "pointer",
+                padding: "0",
+                color: "red",
+                borderBottom: "1px solid red",
+                width: "fit-content",
+              }}
+              onClick={() => setStatusDialogOpen(false)}
+            >
+              Close(X)
+            </p>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "1.5rem",
+                }}
+              >
+                What is the status of this task?
+              </p>
+              <Button
+                disabled={status === "pending"}
+                onClick={() => handleChangeTaskStatus("pending")}
+              >
+                Pending
+              </Button>
+              <Button
+                disabled={status === "in progress"}
+                onClick={() => handleChangeTaskStatus("in progress")}
+              >
+                In progress
+              </Button>
+              <Button
+                disabled={status === "completed"}
+                onClick={() => handleChangeTaskStatus("completed")}
+              >
+                Completed
+              </Button>
+            </div>
+          </dialog>
         </div>
       </div>
       <hr

@@ -42,12 +42,12 @@ const Todo = ({
           {sectionName.charAt(0).toUpperCase() + sectionName.slice(1)}{" "}
           <span
             style={{
-              border: "3px solid #f5f5f5",
+              // border: "3px solid #f5f5f5",
               padding: "0.5rem 1rem",
               borderRadius: "50%",
               marginLeft: "1rem",
               backgroundColor: "#dfdfdf",
-              color: "#4e4f4f",
+              color: "#525252",
             }}
           >
             {" "}
@@ -64,7 +64,6 @@ const Todo = ({
               ? "#0f6af3"
               : "#00b300"
           }
-          transform="rotate(45deg)"
           onClick={handleClearAll}
         >
           Clear all

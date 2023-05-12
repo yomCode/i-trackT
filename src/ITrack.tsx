@@ -46,9 +46,10 @@ const ITrack = () => {
         task={task}
         setTask={setTask}
       />
-      {sectionData?.map((section) => {
+      {sectionData?.map((section, index) => {
         return (
           <TaskSection
+            key={index}
             taskList={taskList}
             setTaskList={setTaskList}
             sectionName={section.name}
