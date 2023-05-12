@@ -13,9 +13,10 @@ const Index = () => {
 
   const handleChangeActiveTheme = (theme: string) => {
     setActiveTheme(theme);
+    localStorage.setItem("theme", theme);
   };
 
-  const theme = activeTheme;
+  const theme = localStorage.getItem("theme") || "light";
 
   document.documentElement.className = theme;
 
