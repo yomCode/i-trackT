@@ -32,10 +32,10 @@ const Index = () => {
           onClick={() => handleChangeActiveTheme("medium")}
           className={`${"medium"} ${activeTheme === "medium" ? "active" : ""}`}
         ></span>
-        <span
+        {/* <span
           onClick={() => handleChangeActiveTheme("dark")}
           className={`${"dark"} ${activeTheme === "dark" ? "active" : ""}`}
-        ></span>
+        ></span> */}
         <span
           onClick={() => handleChangeActiveTheme("gOne")}
           className={`${"gOne"} ${activeTheme === "gOne" ? "active" : ""}`}
