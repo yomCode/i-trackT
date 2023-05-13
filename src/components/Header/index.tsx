@@ -4,12 +4,12 @@ import Logo from "../../assests/images/i-trackTlogo.png";
 import Styles from "./Header.module.css";
 
 export interface ThemesProps {
-  theme: string;
-  setTheme: React.Dispatch<React.SetStateAction<string>>;
+  activeTheme: string;
+  setActiveTheme: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Index = () => {
-  const [activeTheme, setActiveTheme] = React.useState("light");
+const Index = ({ activeTheme, setActiveTheme }: ThemesProps) => {
+  // const [activeTheme, setActiveTheme] = React.useState("light");
 
   const handleChangeActiveTheme = (theme: string) => {
     setActiveTheme(theme);

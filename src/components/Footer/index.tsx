@@ -1,25 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { ThemesProps } from "../Header";
 
-const Footer = () => {
-  const [theme, setTheme] = React.useState<string>(
-    localStorage.getItem("theme") ?? "[]"
-  );
-
-  useEffect(() => {
-    setTheme(localStorage.getItem("theme") ?? "[]");
-  }, [theme]);
+const Footer = ({ activeTheme, setActiveTheme }: ThemesProps) => {
   return (
     <footer
       style={{
         position: "absolute",
-        bottom: "0",
         left: "50%",
-        color: theme === "dark" || "gTwo" ? "white" : "black",
+        transform: "translateX(-50%)",
+        color:
+          activeTheme === "medium" || activeTheme === "light"
+            ? "black"
+            : "white",
+        zIndex: 100,
       }}
     >
       <p>Yomicodes &copy;2022</p>
     </footer>
   );
 };
-
 export default Footer;

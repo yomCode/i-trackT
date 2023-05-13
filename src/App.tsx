@@ -5,11 +5,13 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 const App = () => {
+  const [theme, setTheme] = React.useState<string>("");
+
   return (
     <div className="app">
-      <Header />
+      <Header activeTheme={theme} setActiveTheme={setTheme} />
       <ITrack />
-      <Footer />
+      <Footer activeTheme={theme} setActiveTheme={setTheme} />
     </div>
   );
 };
