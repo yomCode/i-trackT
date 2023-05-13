@@ -38,10 +38,13 @@ const TaskCard = ({
   useEffect(() => {}, []);
 
   const handleUpdateTaskDescription = () => {
+    const addTaskInput = document.getElementById("task");
     const foundTask = taskList?.find((task) => task?.id === id);
     if (foundTask) {
       setTask(foundTask);
     }
+    window.scrollTo(0, 0);
+    addTaskInput?.focus();
   };
 
   const handleDeleteTask = () => {

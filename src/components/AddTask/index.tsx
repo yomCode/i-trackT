@@ -66,6 +66,7 @@ const AddTask = ({ taskList, setTaskList, task, setTask }: TaskListProps) => {
         <input
           type="text"
           name="task"
+          id="task"
           placeholder="add task"
           autoComplete="off"
           value={task && task?.description}

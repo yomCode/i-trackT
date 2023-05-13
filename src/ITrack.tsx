@@ -39,7 +39,6 @@ const ITrack = () => {
         marginBottom: "20rem",
       }}
     >
-      <Header />
       <AddTask
         taskList={taskList}
         setTaskList={setTaskList}
