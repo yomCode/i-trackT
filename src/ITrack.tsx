@@ -33,9 +33,7 @@ const ITrack = () => {
   return (
     <div
       style={{
-        width: "100vw",
-        height: "100vh",
-        marginBottom: "20rem",
+        marginBottom: "10rem",
       }}
     >
       <AddTask

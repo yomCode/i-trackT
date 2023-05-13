@@ -1,5 +1,5 @@
 .container {
-  width: 100%;
+  width: 100vw;
   max-width: 900px;
   margin: 5rem auto;
   background-color: white;

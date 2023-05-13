@@ -1,9 +1,4 @@
-import React, {
-  ReactNode,
-  useEffect,
-  // useRef,
-  useState,
-} from "react";
+import React, { ReactNode, useRef } from "react";
 import { TaskListProps } from "../AddTask";
 import { AiFillEdit } from "react-icons/ai";
 import { MdPendingActions } from "react-icons/md";
@@ -30,12 +25,16 @@ const TaskCard = ({
   task,
   setTask,
 }: TaskCardProps) => {
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [statusDialogOpen, setStatusDialogOpen] = useState(false);
+  const deleteDialogRef = useRef<HTMLDialogElement>(null);
+  const statusDialogRef = useRef<HTMLDialogElement>(null);
 
-  // const dialogRef = useRef();
+  const openDialog = (ref: React.RefObject<HTMLDialogElement>) => {
+    ref.current && ref.current.showModal();
+  };
 
-  useEffect(() => {}, []);
+  const closeDialog = (ref: React.RefObject<HTMLDialogElement>) => {
+    ref.current && ref.current.close();
+  };
 
   const handleUpdateTaskDescription = () => {
     const addTaskInput = document.getElementById("task");
@@ -52,7 +51,7 @@ const TaskCard = ({
     if (newTaskList && setTaskList) {
       setTaskList(newTaskList);
     }
-    setDeleteDialogOpen(false);
+    closeDialog(deleteDialogRef);
   };
 
   const handleChangeTaskStatus = (status: string) => {
@@ -94,11 +93,11 @@ const TaskCard = ({
         <hr className={Styles.hr} />
         <div className={Styles.cta}>
           <RiDeleteBin3Line
-            onClick={() => setDeleteDialogOpen(true)}
+            onClick={() => openDialog(deleteDialogRef)}
             className={[Styles.icon, Styles.delete].join(" ")}
           />
-          <dialog open={deleteDialogOpen}>
-            <p>Are you sure you want to deleted this task?</p>
+          <dialog ref={deleteDialogRef}>
+            <p>Are you sure you want to delete this task?</p>
             <div
               style={{
                 display: "flex",
@@ -107,7 +106,7 @@ const TaskCard = ({
               }}
             >
               <Button onClick={handleDeleteTask}>Yes, sure!</Button>
-              <Button onClick={() => setDeleteDialogOpen(false)}>No</Button>
+              <Button onClick={() => closeDialog(deleteDialogRef)}>No</Button>
             </div>
           </dialog>
           <AiFillEdit
@@ -115,11 +114,11 @@ const TaskCard = ({
             className={[Styles.icon, Styles.edit].join(" ")}
           />
           <MdPendingActions
-            onClick={() => setStatusDialogOpen(true)}
+            onClick={() => openDialog(statusDialogRef)}
             className={[Styles.icon, Styles.update].join(" ")}
           />
 
-          <dialog open={statusDialogOpen}>
+          <dialog ref={statusDialogRef}>
             <p
               style={{
                 marginLeft: "75%",
@@ -132,7 +131,7 @@ const TaskCard = ({
                 borderBottom: "1px solid red",
                 width: "fit-content",
               }}
-              onClick={() => setStatusDialogOpen(false)}
+              onClick={() => closeDialog(statusDialogRef)}
             >
               Close(X)
             </p>
