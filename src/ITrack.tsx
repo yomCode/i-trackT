@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Header from "./components/Header";
 import AddTask from "./components/AddTask";
 import TaskSection from "./components/TaskSection";
 
