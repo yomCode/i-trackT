@@ -9,7 +9,10 @@ const Footer = ({ activeTheme, setActiveTheme }: ThemesProps) => {
         left: "50%",
         transform: "translateX(-50%)",
         color:
-          activeTheme === "medium" || activeTheme === "light"
+          activeTheme === "medium" ||
+          activeTheme === "light" ||
+          activeTheme === "gThree" ||
+          activeTheme === "gTwo"
             ? "black"
             : "white",
         zIndex: 100,

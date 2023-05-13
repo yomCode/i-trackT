@@ -9,8 +9,6 @@ export interface ThemesProps {
 }
 
 const Index = ({ activeTheme, setActiveTheme }: ThemesProps) => {
-  // const [activeTheme, setActiveTheme] = React.useState("light");
-
   const handleChangeActiveTheme = (theme: string) => {
     setActiveTheme(theme);
     localStorage.setItem("theme", theme);
