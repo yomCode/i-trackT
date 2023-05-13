@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import ITrack from "./ITrack";
 import "./index.css";
 import App from "./App";
 
